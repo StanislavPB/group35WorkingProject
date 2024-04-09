@@ -2,11 +2,13 @@ package org.group35workingproject.dto.taskDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class TaskCreateRequestDTO {
 
     private String taskName;
