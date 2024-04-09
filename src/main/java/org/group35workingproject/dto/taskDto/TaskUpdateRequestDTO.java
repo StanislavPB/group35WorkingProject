@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
-public class TaskUpdateRequestDto {
+public class TaskUpdateRequestDTO {
 
     private Integer id;
     private String taskName;

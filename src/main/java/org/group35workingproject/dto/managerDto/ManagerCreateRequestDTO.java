@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class ManagerCreateRequestDto {
+public class ManagerCreateRequestDTO {
 
     private String managerName;
     private String password;

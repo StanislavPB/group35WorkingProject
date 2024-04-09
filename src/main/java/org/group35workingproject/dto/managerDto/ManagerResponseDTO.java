@@ -7,7 +7,7 @@ import org.group35workingproject.domain.Role;
 
 @Data
 @AllArgsConstructor
-public class ManagerResponseDto {
+public class ManagerResponseDTO {
 
     private Integer id;
     private String managerName;

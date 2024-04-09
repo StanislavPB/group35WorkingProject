@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class ManagerCreateResponseDto {
+public class ManagerCreateResponseDTO {
 
     private Integer id;
     private String managerName;
