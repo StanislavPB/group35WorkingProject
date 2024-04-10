@@ -21,16 +21,16 @@ public class Manager  {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotBlank
-    @Pattern(regexp = "^[A-Za-z0-9]+$")
+    @NotBlank(message = "Manager name must be not blank")
+    @Pattern(regexp = "^[A-Za-z0-9]+$", message = "Manager name can contain only latin letters and digital")
     private String managerName;
 
-    @NotBlank
+    @NotBlank(message = "Password must be not blank")
     @Pattern(regexp = "^[A-Za-z0-9!@#$%^&*()]+$")
     private String password;
 
-    @NotBlank
-    @Email
+    @NotBlank(message = "Email must be not blank")
+    @Email(message = "Invalid email format")
     private String email;
 
     @OneToMany(mappedBy = "manager", cascade = CascadeType.ALL)
