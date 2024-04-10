@@ -1,6 +1,9 @@
 package org.group35workingproject.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.*;
 
 import java.util.List;
@@ -18,10 +21,16 @@ public class Manager  {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-     private String managerName;
+    @NotBlank
+    @Pattern(regexp = "^[A-Za-z0-9]+$")
+    private String managerName;
 
-     private String password;
+    @NotBlank
+    @Pattern(regexp = "^[A-Za-z0-9!@#$%^&*()]+$")
+    private String password;
 
+    @NotBlank
+    @Email
     private String email;
 
     @OneToMany(mappedBy = "manager", cascade = CascadeType.ALL)
