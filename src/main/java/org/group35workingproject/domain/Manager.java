@@ -5,8 +5,6 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
-import org.group35workingproject.annotation.OurValidation;
-
 import java.util.List;
 
 @Entity
@@ -42,5 +40,6 @@ public class Manager  {
     @JoinColumn(name = "role_id")
     private Role role;
 
+    private List<String> messages;
 
 }
