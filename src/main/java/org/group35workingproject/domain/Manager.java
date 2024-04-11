@@ -40,6 +40,4 @@ public class Manager  {
     @JoinColumn(name = "role_id")
     private Role role;
 
-    private List<String> messages;
-
 }
