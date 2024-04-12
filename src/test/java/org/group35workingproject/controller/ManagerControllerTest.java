@@ -3,6 +3,7 @@ package org.group35workingproject.controller;
 import org.group35workingproject.dto.managerDto.ManagerCreateRequestDTO;
 import org.group35workingproject.dto.managerDto.ManagerCreateResponseDTO;
 import org.group35workingproject.service.ManagerService;
+import org.group35workingproject.service.exception.AlreadyExistException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -28,7 +29,7 @@ class ManagerControllerTest {
 
     @Test
     public void createManager() throws Exception {
-        ManagerCreateRequestDTO requestDTO = new ManagerCreateRequestDTO();
+
         ManagerCreateResponseDTO responseDTO = new ManagerCreateResponseDTO();
         responseDTO.setId(1); // Установка ID для ответа
         responseDTO.setManagerName("Test Manager");
@@ -45,5 +46,7 @@ class ManagerControllerTest {
                 .andExpect(jsonPath("$.roleName").value("Admin"));
 
     }
+
+
 
 }
