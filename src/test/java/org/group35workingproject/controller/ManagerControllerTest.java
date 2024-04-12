@@ -9,7 +9,10 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import static org.mockito.BDDMockito.given;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -27,13 +30,19 @@ class ManagerControllerTest {
     public void createManager() throws Exception {
         ManagerCreateRequestDTO requestDTO = new ManagerCreateRequestDTO();
         ManagerCreateResponseDTO responseDTO = new ManagerCreateResponseDTO();
+        responseDTO.setId(1); // Установка ID для ответа
+        responseDTO.setManagerName("Test Manager");
+        responseDTO.setRoleName("Admin");
 
-        given(managerService.createManager(requestDTO)).willReturn(responseDTO);
+        when(managerService.createManager(any(ManagerCreateRequestDTO.class))).thenReturn(responseDTO);
 
         mockMvc.perform(post("/api/managers")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{}"))
-                .andExpect(status().isCreated());
+                .content("{\"managerName\":\"John\", \"roleName\":\"Admin\"}"))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.id").exists())
+                .andExpect(jsonPath("$.managerName").value("Test Manager"))
+                .andExpect(jsonPath("$.roleName").value("Admin"));
 
     }
 
