@@ -48,5 +48,34 @@ class ManagerControllerTest {
     }
 
 
+    @Test
+    public void createManagerWhenManagerAlreadyExist() throws Exception {
+        when(managerService.createManager(any(ManagerCreateRequestDTO.class))).thenThrow(new AlreadyExistException("Manager is already exist"));
+
+    mockMvc.perform(post("/api/managers")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content("{\"managerName\":\"John\", \"roleName\":\"Admin\"}"))
+            .andExpect(status().isBadRequest())
+            .andExpect(jsonPath("$.error").value("Manager is already exist"));
+    }
+
+    // .andExpected(content().string(not(isEmptyString())))
+
+    // .andExpected(jsonPath("$").isNotEmpty())
+
+    // .andExpected(jsonPath("$[*]", hasSize(greaterThan(0)))
+
+    // "$.field", notNullValue()
+
+
+    @Test
+    public void createManagerWithInvalidRequestData() throws Exception {
+        String invalidRequestContent = "\"{\"managerName\":\"\", \"roleName\":\"\"}";
+
+        mockMvc.perform(post("/api/managers")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(invalidRequestContent))
+                .andExpect(status().isBadRequest());
+    }
 
 }
