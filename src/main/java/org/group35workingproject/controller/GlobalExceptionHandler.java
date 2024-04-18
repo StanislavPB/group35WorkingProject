@@ -1,7 +1,10 @@
 package org.group35workingproject.controller;
 
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtException;
 import jakarta.validation.ConstraintViolationException;
 import org.group35workingproject.service.exception.AlreadyExistException;
+import org.group35workingproject.service.exception.InvalidJwtException;
 import org.group35workingproject.service.exception.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,4 +53,22 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handlerSQLIntegrityConstraintViolationException(SQLIntegrityConstraintViolationException e){
         return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(InvalidJwtException.class)
+    public ResponseEntity<String> handlerInvalidJwtException(InvalidJwtException e){
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(ExpiredJwtException.class)
+    public ResponseEntity<String> handlerExpiredJwtException(ExpiredJwtException e){
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(JwtException.class)
+    public ResponseEntity<String> handlerJwtException(JwtException e){
+        HttpStatus status = HttpStatus.FORBIDDEN;
+        String message = "Ошибка аутентификации: " + e.getMessage();
+        return new ResponseEntity<>(message, status);
+    }
+
 }

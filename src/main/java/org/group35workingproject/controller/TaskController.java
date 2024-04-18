@@ -37,22 +37,4 @@ public class TaskController {
     };
 
 
-    @GetMapping(params = "managerName")
-    public ResponseEntity<List<TaskResponseDTO>> findTaskByManagerName(@RequestParam String managerName){
-        return new ResponseEntity<>(taskService.findTasksByManagerName(managerName), HttpStatus.OK);
-    };
-
-
-    @PostMapping
-    @Operation(summary = "Create a new task", description = "Создание новой задачи из данных, полученных от пользователя")
-    @ApiResponse(responseCode = "201", description = "Task created",
-    content = {
-            @Content(mediaType = "application/json",
-            schema = @Schema(implementation = TaskCreateOrUpdateResponseDTO.class))
-    })
-    public ResponseEntity<TaskCreateOrUpdateResponseDTO> createNewTask(@RequestBody TaskCreateRequestDTO request){
-        return new ResponseEntity<>(taskService.createTask(request), HttpStatus.CREATED);
-    };
-
-
 }
